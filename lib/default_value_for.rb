@@ -95,7 +95,8 @@ module DefaultValueFor
 			if attrs
 				stringified_attrs = attrs.stringify_keys
 				safe_attrs = if respond_to? :sanitize_for_mass_assignment
-					sanitize_for_mass_assignment(stringified_attrs)
+					options = args.first || {}
+					sanitize_for_mass_assignment(stringified_attrs, options[:as])
 				else
 					remove_attributes_protected_from_mass_assignment(stringified_attrs)
 				end
